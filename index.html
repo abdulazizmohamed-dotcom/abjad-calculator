@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abjad Reference + Calculator</title>
+  <style>
+    :root { color-scheme: light; }
+    body{
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      margin:0; padding:0; background:#fff; color:#111;
+    }
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 20px 72px;
+    }
+    header{
+      text-align:center;
+      margin-bottom: 26px;
+    }
+    h1{
+      font-size: 44px;
+      letter-spacing: -0.02em;
+      margin: 0 0 10px;
+    }
+    p.lead{
+      font-size: 18px;
+      line-height: 1.7;
+      color:#444;
+      margin: 0 auto 18px;
+      max-width: 780px;
+    }
+    .cta{
+      text-align:center;
+      margin: 18px 0 34px;
+    }
+    a.button{
+      display:inline-block;
+      padding: 12px 18px;
+      border: 1px solid #111;
+      border-radius: 10px;
+      text-decoration: none;
+      color:#111;
+      font-size: 16px;
+      transition: transform .06s ease, background .15s ease;
+    }
+    a.button:hover{ background:#111; color:#fff; }
+    a.button:active{ transform: translateY(1px); }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid #eee;
+      border-radius: 14px;
+      background: #fafafa;
+      padding: 18px;
+    }
+    .card h2{
+      font-size: 18px;
+      margin: 0 0 10px;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin: 0 0 10px;
+      color:#444;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .muted{
+      color:#666;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    table{
+      width:100%;
+      border-collapse: collapse;
+      background:#fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow:hidden;
+    }
+    thead th{
+      text-align:left;
+      font-size: 13px;
+      color:#555;
+      background:#f5f5f5;
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+    }
+    tbody td{
+      padding: 10px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+    }
+    tbody tr:last-child td{ border-bottom:none; }
+
+    .rtl{
+      direction: rtl;
+      text-align: right;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 14px;
+      background:#fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 12px;
+      line-height: 1.7;
+      overflow-x:auto;
+    }
+    .example-title{
+      display:flex;
+      gap:10px;
+      align-items:baseline;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    .pill{
+      display:inline-block;
+      font-size: 12px;
+      color:#333;
+      background:#efefef;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    footer{
+      text-align:center;
+      margin-top: 26px;
+      color:#666;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header>
+      <h1>Abjad</h1>
+      <p class="lead">
+        Abjad is a classical letter–number system in which each Arabic letter carries a fixed numerical value. This page gives the full reference table and a worked example, and then you can open the calculator to compute any word instantly.
+      </p>
+      <div class="cta">
+        <a class="button" href="./abjad.html">Open the "Abjad Calculator"</a>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Abjad value table</h2>
+        <p>
+          The table below lists the standard classical Abjad values. The calculator sums these values letter by letter.
+        </p>
+
+        <table aria-label="Abjad letter values">
+          <thead>
+            <tr>
+              <th style="width:40%;">Letter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="rtl">ا</td><td>1</td></tr>
+            <tr><td class="rtl">ب</td><td>2</td></tr>
+            <tr><td class="rtl">ج</td><td>3</td></tr>
+            <tr><td class="rtl">د</td><td>4</td></tr>
+            <tr><td class="rtl">ه</td><td>5</td></tr>
+            <tr><td class="rtl">و</td><td>6</td></tr>
+            <tr><td class="rtl">ز</td><td>7</td></tr>
+            <tr><td class="rtl">ح</td><td>8</td></tr>
+            <tr><td class="rtl">ط</td><td>9</td></tr>
+
+            <tr><td class="rtl">ي</td><td>10</td></tr>
+            <tr><td class="rtl">ك</td><td>20</td></tr>
+            <tr><td class="rtl">ل</td><td>30</td></tr>
+            <tr><td class="rtl">م</td><td>40</td></tr>
+            <tr><td class="rtl">ن</td><td>50</td></tr>
+            <tr><td class="rtl">س</td><td>60</td></tr>
+            <tr><td class="rtl">ع</td><td>70</td></tr>
+            <tr><td class="rtl">ف</td><td>80</td></tr>
+            <tr><td class="rtl">ص</td><td>90</td></tr>
+
+            <tr><td class="rtl">ق</td><td>100</td></tr>
+            <tr><td class="rtl">ر</td><td>200</td></tr>
+            <tr><td class="rtl">ش</td><td>300</td></tr>
+            <tr><td class="rtl">ت</td><td>400</td></tr>
+            <tr><td class="rtl">ث</td><td>500</td></tr>
+            <tr><td class="rtl">خ</td><td>600</td></tr>
+            <tr><td class="rtl">ذ</td><td>700</td></tr>
+            <tr><td class="rtl">ض</td><td>800</td></tr>
+            <tr><td class="rtl">ظ</td><td>900</td></tr>
+            <tr><td class="rtl">غ</td><td>1000</td></tr>
+          </tbody>
+        </table>
+
+        <div class="muted">
+          Note: This is the standard Abjad sequence used in most classical references. If you want to normalize variants (مثل "أ/إ/آ" to "ا" or strip tashkīl), we can add that to the calculator.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="example-title">
+          <h2 style="margin:0;">Worked example</h2>
+          <span class="pill">Letter-by-letter</span>
+        </div>
+
+        <p>
+          To calculate a word, you take each letter’s value and add them together.
+        </p>
+
+        <p class="rtl" style="margin-top:10px; font-size:22px;">الله</p>
+
+        <div class="mono" aria-label="Example calculation">
+          ا = 1<br/>
+          ل = 30<br/>
+          ل = 30<br/>
+          ه = 5<br/>
+          <br/>
+          Total = 1 + 30 + 30 + 5 = <strong>66</strong>
+        </div>
+
+        <p style="margin-top:12px;">
+          The calculator does the same summation automatically, and will warn you if it encounters characters outside the standard Abjad set.
+        </p>
+
+        <div class="cta" style="text-align:left; margin-top: 14px;">
+          <a class="button" href="./abjad.html">Go to the calculator</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Built as a lightweight public tool. No tracking, no sign-in.
+    </footer>
+  </main>
+</body>
+</html>
