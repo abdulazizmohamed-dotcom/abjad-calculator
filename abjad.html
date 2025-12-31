@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abjad Calculator</title>
+  <style>
+    :root { color-scheme: light; }
+    body{
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      margin:0; padding:0; background:#fff; color:#111;
+    }
+    .wrap{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 20px;
+      text-align: center;
+    }
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 22px;
+    }
+    a.back{
+      text-decoration:none;
+      color:#111;
+      border:1px solid #ddd;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    h1{ font-size: 38px; letter-spacing:-0.02em; margin: 12px 0 10px; }
+    p{ font-size: 16px; line-height: 1.65; color:#444; margin: 0 auto 20px; max-width: 620px; }
+    input{
+      font-size: 20px;
+      padding: 12px 14px;
+      width: 100%;
+      max-width: 520px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      text-align: center;
+      margin: 14px auto 14px;
+      outline: none;
+    }
+    input:focus{ border-color:#111; }
+    .buttons{ margin-top: 6px; }
+    button{
+      font-size: 16px;
+      padding: 10px 16px;
+      cursor: pointer;
+      margin: 6px;
+      border-radius: 12px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      transition: transform .06s ease, opacity .15s ease;
+    }
+    button.secondary{
+      background: #fff;
+      color: #111;
+      border-color: #ddd;
+    }
+    button:active{ transform: translateY(1px); }
+    .result{
+      margin-top: 18px;
+      font-size: 18px;
+    }
+    .warning{
+      margin-top: 10px;
+      font-size: 14px;
+      color: #b00020;
+      line-height: 1.5;
+    }
+    .card{
+      margin: 22px auto 0;
+      max-width: 560px;
+      padding: 16px 16px;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      background: #fafafa;
+      text-align: left;
+    }
+    .card small{ color:#666; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <a class="back" href="./index.html">← Back</a>
+      <span></span>
+    </div>
+
+    <h1>Abjad Calculator</h1>
+    <p>
+      Enter an Arabic word and click "Calculate" to sum the classical Abjad values of each letter. Click "Reset" to start over.
+    </p>
+
+    <input
+      type="text"
+      id="arabicInput"
+      placeholder="اكتب كلمة عربية"
+      dir="rtl"
+      autocomplete="off"
+      spellcheck="false"
+    />
+
+    <div class="buttons">
+      <button onclick="calculateAbjad()">Calculate</button>
+      <button class="secondary" onclick="resetAbjad()">Reset</button>
+    </div>
+
+    <div class="result" id="result"></div>
+    <div class="warning" id="warning"></div>
+
+    <div class="card">
+      <small>
+        Note: Characters outside the standard Abjad set are ignored and listed as warnings. If you want, we can add normalization (e.g., treating أ/إ/آ as ا, removing tashkīl).
+      </small>
+    </div>
+  </main>
+
+  <script>
+    const abjadNumerals = {
+      'ا': 1, 'ب': 2, 'ج': 3, 'د': 4, 'ه': 5, 'و': 6, 'ز': 7, 'ح': 8, 'ط': 9,
+      'ي': 10, 'ك': 20, 'ل': 30, 'م': 40, 'ن': 50, 'س': 60, 'ع': 70, 'ف': 80,
+      'ص': 90, 'ق': 100, 'ر': 200, 'ش': 300, 'ت': 400, 'ث': 500, 'خ': 600,
+      'ذ': 700, 'ض': 800, 'ظ': 900, 'غ': 1000
+    };
+
+    function calculateAbjadValue(word) {
+      let total = 0;
+      let warnings = [];
+
+      for (const char of word) {
+        if (Object.prototype.hasOwnProperty.call(abjadNumerals, char)) {
+          total += abjadNumerals[char];
+        } else if (char.trim() !== "") {
+          warnings.push(`Character '${char}' not found`);
+        }
+      }
+
+      return { total, warnings };
+    }
+
+    function calculateAbjad() {
+      const input = document.getElementById("arabicInput").value;
+      const resultDiv = document.getElementById("result");
+      const warningDiv = document.getElementById("warning");
+
+      const { total, warnings } = calculateAbjadValue(input);
+
+      resultDiv.textContent = input ? `Abjad value: ${total}` : "";
+      warningDiv.innerHTML = warnings.length ? warnings.join("<br>") : "";
+    }
+
+    function resetAbjad() {
+      document.getElementById("arabicInput").value = "";
+      document.getElementById("result").textContent = "";
+      document.getElementById("warning").innerHTML = "";
+      document.getElementById("arabicInput").focus();
+    }
+  </script>
+</body>
+</html>
